@@ -1,0 +1,22 @@
+{
+  "name": "nepsd",
+  "description": "diagraph prototype",
+  "main": "index.js",
+  "authors": [
+    "Qiu Juntao <juntao.qiu@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jointjs": "~0.9.7"
+  }
+}
