@@ -9,37 +9,24 @@ $(function() {
         gridSize: 1
     });
 
-    var rect = new joint.shapes.basic.Rect({
-        position: { x: 100, y: 30 },
-        size: { width: 100, height: 30 },
-        attrs: { rect: { fill: 'blue' }, text: { text: 'my box', fill: 'white' } }
+    $.get('/api/graph/56b8672cb29ddd49c04d0396', function(data) {
+        graph.fromJSON(data);
     });
 
-    rect.attr({
-        rect: { fill: '#2C3E50', rx: 5, ry: 5, 'stroke-width': 1, stroke: 'black' },
-        text: {
-            text: 'my label', 
-            fill: '#3498DB',
-            'font-size': 18, 
-            'font-weight': 'bold', 
-            'font-variant': 'small-caps', 
-            'text-transform': 'capitalize'
-        }
+    $("#save").on('click', function() {
+        $.ajax({
+            url: '/api/graph',
+            type: 'POST',
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            data: JSON.stringify(graph.toJSON()),
+            success: function(data) {
+                $('#result').html('Graph is saved successfully');
+            },
+            error: function(err) {
+                $('#result').html('something went wrong');
+            }
+        });
     });
 
-    var rect2 = rect.clone();
-    rect2.translate(300);
-
-    var link = new joint.dia.Link({
-        source: { id: rect.id },
-        target: { id: rect2.id }
-    });
-
-    link.attr({
-        '.connection': { stroke: '#3498DB' },
-        '.marker-source': { fill: 'transparent', d: 'M 10 0 L 0 5 L 10 10 z' },
-        '.marker-target': { fill: 'transparent', d: 'M 10 0 L 0 5 L 10 10 z' }
-    });
-
-    graph.addCells([rect, rect2, link]);    
 });
