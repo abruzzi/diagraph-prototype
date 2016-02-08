@@ -14,19 +14,20 @@ $(function() {
     });
 
     $("#save").on('click', function() {
+
         $.ajax({
-            url: '/api/graph',
-            type: 'POST',
+            url: '/api/graph/56b8672cb29ddd49c04d0396',
+            type: 'PUT',
             contentType:"application/json; charset=utf-8",
             dataType:"json",
             data: JSON.stringify(graph.toJSON()),
             success: function(data) {
-                $('#result').html('Graph is saved successfully');
+                $('#message').html('Graph is saved successfully');
             },
             error: function(err) {
-                $('#result').html('something went wrong');
-            }
-        });
+                $('#message').html('something went wrong');
+            } 
+        })
     });
 
 });
