@@ -1,3 +1,21 @@
+joint.shapes.basic.DecoratedRect = joint.shapes.basic.Generic.extend({
+
+    markup: '<g class="rotatable"><g class="scalable"><rect/></g><image/><text/></g>',
+
+    defaults: joint.util.deepSupplement({
+
+        type: 'basic.DecoratedRect',
+        size: { width: 100, height: 60 },
+        attrs: {
+            'rect': { fill: '#FFFFFF', stroke: 'black', width: 100, height: 60 },
+            'text': { 'font-size': 14, text: '', 'ref-x': .5, 'ref-y': .5, ref: 'rect', 'y-alignment': 'middle', 'x-alignment': 'middle', fill: 'black' },
+            'image': { 'ref-x': 2, 'ref-y': 2, ref: 'rect', width: 16, height: 16 }
+        }
+
+    }, joint.shapes.basic.Generic.prototype.defaults),
+
+});
+
 $(function() {
     var graph = new joint.dia.Graph;
 
@@ -9,25 +27,6 @@ $(function() {
         gridSize: 1
     });
 
-    joint.shapes.basic.DecoratedRect = joint.shapes.basic.Generic.extend({
-
-        markup: '<g class="rotatable"><g class="scalable"><rect/></g><image/><text/></g>',
-
-        defaults: joint.util.deepSupplement({
-
-            type: 'basic.DecoratedRect',
-            size: { width: 100, height: 60 },
-            attrs: {
-                'rect': { fill: '#FFFFFF', stroke: 'black', width: 100, height: 60 },
-                'text': { 'font-size': 14, text: '', 'ref-x': .5, 'ref-y': .5, ref: 'rect', 'y-alignment': 'middle', 'x-alignment': 'middle', fill: 'black' },
-                'image': { 'ref-x': 2, 'ref-y': 2, ref: 'rect', width: 16, height: 16 }
-            }
-
-        }, joint.shapes.basic.Generic.prototype.defaults),
-
-
-    });
-
     var decoratedRect = new joint.shapes.basic.DecoratedRect({
         position: { x: 10, y: 60 },
         size: { width: 100, height: 60 },
@@ -35,7 +34,7 @@ $(function() {
             text: { text: 'My Element' },
             image: { 'xlink:href': 'http://placehold.it/16x16' }
         },
-        waterMark: "Juntao Qiu"   
+        waterMark: "Juntao Qiu", 
     });
 
     var decoratedRect2 = new joint.shapes.basic.DecoratedRect({
