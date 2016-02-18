@@ -28,27 +28,37 @@ $(function() {
 
     });
 
-    // var decoratedRect = new joint.shapes.basic.DecoratedRect({
-    //     position: { x: 150, y: 80 },
-    //     size: { width: 100, height: 60 },
-    //     attrs: { 
-    //         text: { text: 'My Element' },
-    //         image: { 'xlink:href': 'http://placehold.it/16x16' }
-    //     },
-    //     waterMark: "Juntao Qiu"   
-    // });
+    var decoratedRect = new joint.shapes.basic.DecoratedRect({
+        position: { x: 10, y: 60 },
+        size: { width: 100, height: 60 },
+        attrs: { 
+            text: { text: 'My Element' },
+            image: { 'xlink:href': 'http://placehold.it/16x16' }
+        },
+        waterMark: "Juntao Qiu"   
+    });
 
-    // var decoratedRect2 = new joint.shapes.basic.DecoratedRect({
-    //     position: { x: 80, y: 80 },
-    //     size: { width: 60, height: 60 },
-    //     attrs: { 
-    //         text: { text: 'Your Element' },
-    //         image: { 'xlink:href': 'http://placehold.it/16x16' }
-    //     },
-    //     waterMark: "Guo Degang"
-    // });
-    
-    // graph.addCell([decoratedRect, decoratedRect2]);
+    var decoratedRect2 = new joint.shapes.basic.DecoratedRect({
+        position: { x: 280, y: 80 },
+        size: { width: 80, height: 60 },
+        attrs: { 
+            text: { text: 'Your Element' },
+            image: { 'xlink:href': 'http://placehold.it/16x16' }
+        },
+        waterMark: "Guo Degang"
+    });
+
+    var link = new joint.dia.Link({
+        source: { id: decoratedRect.id },
+        target: { id: decoratedRect2.id },
+        attrs: {
+            '.connection': { stroke: 'blue' },
+            '.marker-source': { fill: 'red', d: 'M 10 0 L 0 5 L 10 10 z' },
+            '.marker-target': { fill: 'yellow', d: 'M 10 0 L 0 5 L 10 10 z' }
+        }
+    });
+
+    // graph.addCell([decoratedRect, decoratedRect2, link]);
 
     $.get('/samples/decorated-rect.json', function(data) {
         graph.fromJSON(data);
