@@ -42,7 +42,7 @@ joint.shapes.basic.Generic.extend(_.extend({}, joint.shapes.basic.PortsModelInte
         'y': 0,
         'x': 0,
         'stroke-width': 0,
-        'fill': 'green',
+        'fill': '#4B4E6B',
       },
       '.puerto circle': {
         r: 5,
@@ -94,6 +94,8 @@ joint.shapes.libreria.modelLink = joint.dia.Link.extend({
       '.marker-arrowhead': {
         d: 'M 10 0 L 0 5 L 10 10 z',
       },
+      '.marker-source': { fill: 'red', d: 'M 10 0 L 0 5 L 10 10 z' },
+      '.marker-target': { fill: 'yellow', d: 'M 10 0 L 0 5 L 10 10 z' },
       '.marker-vertex': {
         r: 8,
       },
@@ -157,30 +159,43 @@ $(function() {
 
     var paper = new joint.dia.Paper({
         el: $('#myholder'),
-        width: 600,
-        height: 200,
+        width: 800,
+        height: 600,
         model: graph,
         gridSize: 1
     });
 
-    var model = new joint.shapes.libreria.modelGenerador({
-      position: { x: 10, y: 60 }
+    var model1 = new joint.shapes.libreria.modelGenerador({
     });
 
     var model2 = new joint.shapes.libreria.modelGenerador({
-      position: { x: 100, y: 100}
     });
 
-    var link = new joint.shapes.libreria.modelLink({
-      source: { id: model.id },
+    var model3 = new joint.shapes.libreria.modelGenerador({
+    });
+
+    var link12 = new joint.shapes.libreria.modelLink({
+      source: { id: model1.id },
       target: { id: model2.id },
     });
 
-    // graph.addCells([model, model2, link]);
-
-    $.get('/samples/lines.json', function(data) {
-        graph.fromJSON(data);
+    var link23 = new joint.shapes.libreria.modelLink({
+      source: { id: model2.id },
+      target: { id: model3.id },
     });
+
+    var link13 = new joint.shapes.libreria.modelLink({
+      source: { id: model1.id },
+      target: { id: model3.id },
+    });
+
+    graph.addCells([model1, model2, model3, link12, link23, link13]);
+    joint.layout.DirectedGraph.layout(graph, { setLinkVertices: false });
+
+    // $.get('/samples/lines.json', function(data) {
+    //     graph.fromJSON(data);
+    // });
+
     $("#save").on('click', function() {
         console.log(graph.toJSON());
     });

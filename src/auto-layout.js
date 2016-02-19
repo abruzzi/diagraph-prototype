@@ -68,9 +68,6 @@ var paper = new joint.dia.Paper({
     model: graph
 });
 
-// // Just give the viewport a little padding.
-// V(paper.viewport).translate(20, 20);
-
 function layout() {
     try {
         var adjacencyList = {
