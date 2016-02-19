@@ -17,6 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "jointjs": "~0.9.7"
+    "jointjs": "~0.9.7",
+    "dagre": "~0.7.4",
+    "graphlib": "^2.0.0"
   }
 }
